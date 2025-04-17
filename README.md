@@ -1,6 +1,6 @@
 # 📊 Smart Pricing Engine
 
-*"Because guessing prices is so last decade"*
+*"Because guessing prices is so boring"*
 
 ## 🧠 What's This All About?
 
@@ -32,7 +32,7 @@ The engine applies these rules in order:
 pip install pandas
 
 # 2. Run the pricing engine
-python pricing_engine.py
+python python.py
 
 # 3. Check your new prices
 cat updated_prices.csv
@@ -42,8 +42,8 @@ cat updated_prices.csv
 
 ```
 .
-├── pricing_engine.py    # Main pricing logic
-├── products.csv         # Input: Product catalog
+├── python.py    # Main pricing logic
+├── product.csv         # Input: Product catalog
 ├── sales.csv           # Input: Recent sales data
 └── updated_prices.csv  # Output: Optimized prices
 ```
@@ -66,3 +66,5 @@ Found a bug? Want to improve something?
 ---
 
 *Built with Python and ❤️*
+
+
