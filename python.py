@@ -2,11 +2,11 @@ import pandas as pd
 
 def main():
     # Read input files
-    products = pd.read_csv('products.csv')
+    product = pd.read_csv('product.csv')
     sales = pd.read_csv('sales.csv')
 
     # Merge sales data with products
-    merged_data = pd.merge(products, sales, on='sku', how='left')
+    merged_data = pd.merge(product, sales, on='sku', how='left')
 
     # Calculate new price based on rules
     def apply_pricing_rules(row):
@@ -27,7 +27,7 @@ def main():
         elif stock > 100 and quantity_sold < 20:
             new_price = current_price * 0.90
 
-        # Default: No rule applied
+        # Default: 
         else:
             new_price = current_price
 
@@ -40,10 +40,14 @@ def main():
 
     merged_data['new_price'] = merged_data.apply(apply_pricing_rules, axis=1)
 
-    # Generate output with units
-    output = merged_data[['sku', 'current_price', 'new_price']]
-    output.rename(columns={'current_price': 'old_price (USD)', 'new_price': 'new_price (USD)'}, inplace=True)
+# Output to 2 decimal places 
+    output = merged_data[['sku', 'current_price', 'new_price']].copy()
+    output['current_price'] = output['current_price'].apply(lambda x: f"{x:.2f}")
+    output['new_price'] = output['new_price'].apply(lambda x: f"{x:.2f}")
+    output.columns = ['sku', 'old_price (INR)', 'new_price (INR)']
+    
     output.to_csv('updated_prices.csv', index=False)
+    print("Prices saved with 2 decimal places in 'updated_prices.csv'")
 
 if __name__ == "__main__":
     main()
